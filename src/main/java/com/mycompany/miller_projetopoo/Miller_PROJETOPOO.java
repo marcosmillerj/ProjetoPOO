@@ -11,6 +11,6 @@ package com.mycompany.miller_projetopoo;
 public class Miller_PROJETOPOO {
 
     public static void main(String[] args) {
-        System.out.println("Hello Worldaakiscubaa!");
+        System.out.println("Hello Worldaakiscueaa!");
     }
 }
