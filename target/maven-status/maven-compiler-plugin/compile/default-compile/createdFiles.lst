@@ -4,12 +4,13 @@ utils/JsonHandler.class
 controller/ClienteController.class
 models/Pessoa.class
 controller/PessoaController.class
+com/mycompany/miller_projetopoo/MenuFuncionario.class
 models/Produto.class
-view/Loguin.class
 models/Instrutor.class
 models/Cliente.class
 models/Reserva.class
 com/mycompany/miller_projetopoo/Miller_PROJETOPOO.class
+com/mycompany/miller_projetopoo/MenuAdmin.class
 controller/AulaController.class
 controller/ProdutoController.class
 models/Aula.class

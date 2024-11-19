@@ -1,3 +1,5 @@
+/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/com/mycompany/miller_projetopoo/MenuAdmin.java
+/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/com/mycompany/miller_projetopoo/MenuFuncionario.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/com/mycompany/miller_projetopoo/Miller_PROJETOPOO.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/AulaController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/ClienteController.java
@@ -12,4 +14,3 @@
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Produto.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Reserva.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/utils/JsonHandler.java
-/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/view/Loguin.java
