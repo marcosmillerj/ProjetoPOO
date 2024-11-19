@@ -10,7 +10,7 @@ package controller;
  */
 
 import models.Aula;
-import models.Instrutor;
+import models.Funcionario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,22 +20,22 @@ public class AulaController {
     private List<Aula> aulas;
 
     public AulaController() {
-        this.aulas = new ArrayList<>(); // Inicializa a lista de aulas
+        this.aulas = new ArrayList<>();
     }
 
     // Criar uma nova aula
-    public boolean criarAula(String tipo, LocalDateTime horario, Instrutor instrutor) {
-        if (instrutor == null || tipo == null || tipo.isEmpty()) {
+    public boolean criarAula(String tipo, LocalDateTime horario, Funcionario funcionario) {
+        if (funcionario == null || tipo == null || tipo.isEmpty()) {
             return false; // Validação básica
         }
-        Aula novaAula = new Aula(tipo, horario, instrutor);
+        Aula novaAula = new Aula(tipo, horario, funcionario);
         aulas.add(novaAula);
         return true;
     }
 
     // Listar todas as aulas
     public List<Aula> listarAulas() {
-        return new ArrayList<>(aulas); // Retorna uma cópia da lista para evitar modificações externas
+        return new ArrayList<>(aulas); // Retorna uma cópia da lista
     }
 
     // Buscar aula pelo tipo
@@ -45,19 +45,19 @@ public class AulaController {
                 return aula;
             }
         }
-        return null; // Não encontrou
+        return null;
     }
 
     // Atualizar uma aula
-    public boolean atualizarAula(String tipo, String novoTipo, LocalDateTime novoHorario, Instrutor novoInstrutor) {
+    public boolean atualizarAula(String tipo, String novoTipo, LocalDateTime novoHorario, Funcionario novoFuncionario) {
         Aula aula = buscarAulaPorTipo(tipo);
         if (aula != null) {
             if (novoTipo != null && !novoTipo.isEmpty()) aula.setTipo(novoTipo);
             if (novoHorario != null) aula.setHorario(novoHorario);
-            if (novoInstrutor != null) aula.setInstrutor(novoInstrutor);
+            if (novoFuncionario != null) aula.setFuncionario(novoFuncionario);
             return true;
         }
-        return false; // Aula não encontrada
+        return false;
     }
 
     // Remover uma aula
@@ -67,7 +67,8 @@ public class AulaController {
             aulas.remove(aula);
             return true;
         }
-        return false; // Aula não encontrada
+        return false;
     }
 }
+
 

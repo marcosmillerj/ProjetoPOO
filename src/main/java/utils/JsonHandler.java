@@ -1,33 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package utils;
 
-/**
- *
- * @author marcos_miller
- */
-
 import models.Cliente;
-import models.Instrutor;
+import models.Funcionario;
 import models.Produto;
 import models.Reserva;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-
 
 public class JsonHandler {
 
     // Caminho dos arquivos JSON
     private static final String CLIENTES_FILE = "clientes.json";
-    private static final String INSTRUTORES_FILE = "instrutores.json";
+    private static final String FUNCIONARIOS_FILE = "funcionarios.json";
     private static final String PRODUTOS_FILE = "produtos.json";
     private static final String RESERVAS_FILE = "reservas.json";
 
@@ -35,8 +25,7 @@ public class JsonHandler {
     public static List<Cliente> carregarClientes() {
         List<Cliente> clientes = new ArrayList<>();
         try {
-            FileReader reader = new FileReader(CLIENTES_FILE);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(CLIENTES_FILE));
             StringBuilder jsonContent = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -44,7 +33,6 @@ public class JsonHandler {
             }
             JSONArray jsonArray = new JSONArray(jsonContent.toString());
 
-            // Convertendo o JSONArray para lista de objetos Cliente
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Cliente cliente = new Cliente(
@@ -60,8 +48,8 @@ public class JsonHandler {
         }
         return clientes;
     }
-
-    // Método para salvar a lista de clientes no arquivo JSON
+    
+    //método para salvar os clientes
     public static void salvarClientes(List<Cliente> clientes) {
         JSONArray jsonArray = new JSONArray();
         for (Cliente cliente : clientes) {
@@ -79,12 +67,11 @@ public class JsonHandler {
         }
     }
 
-    // Método para carregar a lista de instrutores
-    public static List<Instrutor> carregarInstrutores() {
-        List<Instrutor> instrutores = new ArrayList<>();
+    // Método para carregar a lista de funcionários
+    public static List<Funcionario> carregarFuncionarios() {
+        List<Funcionario> funcionarios = new ArrayList<>();
         try {
-            FileReader reader = new FileReader(INSTRUTORES_FILE);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(FUNCIONARIOS_FILE));
             StringBuilder jsonContent = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -92,37 +79,38 @@ public class JsonHandler {
             }
             JSONArray jsonArray = new JSONArray(jsonContent.toString());
 
-            // Convertendo o JSONArray para lista de objetos Instrutor
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                Instrutor instrutor = new Instrutor(
-                        jsonObject.getString("cpf"),
+                Funcionario funcionario = new Funcionario(
                         jsonObject.getString("nome"),
+                        jsonObject.getString("cpf"),
+                        jsonObject.getString("cargo"),
+                        jsonObject.getDouble("salario"),
                         jsonObject.getString("telefone"),
-                        jsonObject.getString("email"),
-                        jsonObject.getString("especialidade")
+                        jsonObject.getString("email")
                 );
-                instrutores.add(instrutor);
+                funcionarios.add(funcionario);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return instrutores;
+        return funcionarios;
     }
-
-    // Método para salvar a lista de instrutores no arquivo JSON
-    public static void salvarInstrutores(List<Instrutor> instrutores) {
+    
+    //método salvar os funcinários
+    public static void salvarFuncionarios(List<Funcionario> funcionarios) {
         JSONArray jsonArray = new JSONArray();
-        for (Instrutor instrutor : instrutores) {
+        for (Funcionario funcionario : funcionarios) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cpf", instrutor.getCpf());
-            jsonObject.put("nome", instrutor.getNome());
-            jsonObject.put("telefone", instrutor.getTelefone());
-            jsonObject.put("email", instrutor.getEmail());
-            jsonObject.put("especialidade", instrutor.getEspecialidade());
+            jsonObject.put("nome", funcionario.getNome());
+            jsonObject.put("cpf", funcionario.getCpf());
+            jsonObject.put("telefone", funcionario.getTelefone());
+            jsonObject.put("email", funcionario.getEmail());
+            jsonObject.put("cargo", funcionario.getCargo());
+            jsonObject.put("salario", funcionario.getSalario()); // Salvando o salário
             jsonArray.put(jsonObject);
         }
-        try (FileWriter file = new FileWriter(INSTRUTORES_FILE)) {
+        try (FileWriter file = new FileWriter(FUNCIONARIOS_FILE)) {
             file.write(jsonArray.toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,8 +121,7 @@ public class JsonHandler {
     public static List<Produto> carregarProdutos() {
         List<Produto> produtos = new ArrayList<>();
         try {
-            FileReader reader = new FileReader(PRODUTOS_FILE);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(PRODUTOS_FILE));
             StringBuilder jsonContent = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -142,14 +129,13 @@ public class JsonHandler {
             }
             JSONArray jsonArray = new JSONArray(jsonContent.toString());
 
-            // Convertendo o JSONArray para lista de objetos Produto
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Produto produto = new Produto(
                         jsonObject.getString("codigo"),
                         jsonObject.getString("nome"),
                         jsonObject.getDouble("preco"),
-                        jsonObject.getInt("quantidade")                     
+                        jsonObject.getInt("quantidade")
                 );
                 produtos.add(produto);
             }
@@ -159,7 +145,6 @@ public class JsonHandler {
         return produtos;
     }
 
-    // Método para salvar a lista de produtos no arquivo JSON
     public static void salvarProdutos(List<Produto> produtos) {
         JSONArray jsonArray = new JSONArray();
         for (Produto produto : produtos) {
@@ -181,8 +166,7 @@ public class JsonHandler {
     public static List<Reserva> carregarReservas() {
         List<Reserva> reservas = new ArrayList<>();
         try {
-            FileReader reader = new FileReader(RESERVAS_FILE);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(RESERVAS_FILE));
             StringBuilder jsonContent = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -190,11 +174,10 @@ public class JsonHandler {
             }
             JSONArray jsonArray = new JSONArray(jsonContent.toString());
 
-            // Convertendo o JSONArray para lista de objetos Reserva
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Reserva reserva = new Reserva(
-                        new Cliente(jsonObject.getString("cpfCliente"), "", "", ""),  // Aqui é necessário um cliente completo, pode ser ajustado se necessário.
+                        new Cliente(jsonObject.getString("cpfCliente"), "", "", ""),
                         new SimpleDateFormat("yyyy-MM-dd").parse(jsonObject.getString("dataReserva"))
                 );
                 reserva.setCodigo(jsonObject.getString("codigo"));
@@ -205,8 +188,8 @@ public class JsonHandler {
         }
         return reservas;
     }
-
-    // Método para salvar a lista de reservas no arquivo JSON
+    
+    // metodo Salvar as reservas
     public static void salvarReservas(List<Reserva> reservas) {
         JSONArray jsonArray = new JSONArray();
         for (Reserva reserva : reservas) {

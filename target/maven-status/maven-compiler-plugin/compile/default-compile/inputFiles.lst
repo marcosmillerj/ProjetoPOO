@@ -3,13 +3,13 @@
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/com/mycompany/miller_projetopoo/Miller_PROJETOPOO.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/AulaController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/ClienteController.java
-/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/InstrutorController.java
+/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/FuncionarioController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/PessoaController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/ProdutoController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/controller/ReservaController.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Aula.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Cliente.java
-/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Instrutor.java
+/home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Funcionario.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Pessoa.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Produto.java
 /home/marcos_miller/Documentos/facul/Miller_PROJETOPOO/src/main/java/models/Reserva.java

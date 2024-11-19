@@ -10,49 +10,61 @@ package controller;
  */
 
 import models.Cliente;
-
+import utils.JsonHandler;
 import java.util.List;
 
 public class ClienteController {
-    private List<Cliente> clientes; // Lista de clientes (pode ser substituída por um banco de dados futuramente)
+    private List<Cliente> clientes; // Lista de clientes
 
     // Construtor
     public ClienteController(List<Cliente> clientes) {
         this.clientes = clientes;
     }
 
-    // Método para buscar cliente por CPF
-    private Cliente buscarClientePorCpf(String cpf) {
+    // Buscar cliente por CPF
+    public Cliente buscarCliente(String cpf) {
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
                 return cliente;
             }
         }
-        return null; // Cliente não encontrado
+        return null;
     }
 
-    // Método para atualizar dados de um cliente
-    public boolean atualizarCliente(String cpf, String novoNome, String novoTelefone, String novoEmail) {
-        Cliente cliente = buscarClientePorCpf(cpf);
-        if (cliente != null) {
-            // Atualizando os atributos do cliente
-            if (novoNome != null && !novoNome.isEmpty()) cliente.setNome(novoNome);
-            if (novoTelefone != null && !novoTelefone.isEmpty()) cliente.setTelefone(novoTelefone);
-            if (novoEmail != null && !novoEmail.isEmpty()) cliente.setEmail(novoEmail);
-
-            return true; // Cliente atualizado com sucesso
-        }
-        return false; // Cliente não encontrado
+    // Cadastrar cliente
+    public void cadastrarCliente(String nome, String cpf, String telefone, String email) {
+        Cliente novoCliente = new Cliente(nome, cpf, telefone, email);
+        clientes.add(novoCliente);
+        JsonHandler.salvarClientes(clientes); // Salvar alterações no arquivo JSON
     }
 
-    // Método para remover um cliente
-    public boolean removerCliente(String cpf) {
-        Cliente cliente = buscarClientePorCpf(cpf);
+    // Atualizar cliente
+    public boolean atualizarCliente(String cpf, String nome, String telefone, String email) {
+        Cliente cliente = buscarCliente(cpf);
         if (cliente != null) {
-            clientes.remove(cliente);
+            cliente.setNome(nome);
+            cliente.setTelefone(telefone);
+            cliente.setEmail(email);
+            JsonHandler.salvarClientes(clientes); // Salvar alterações no arquivo JSON
             return true;
         }
         return false; // Cliente não encontrado
+    }
+
+    // Remover cliente
+    public boolean removerCliente(String cpf) {
+        Cliente cliente = buscarCliente(cpf);
+        if (cliente != null) {
+            clientes.remove(cliente);
+            JsonHandler.salvarClientes(clientes); // Salvar alterações no arquivo JSON
+            return true;
+        }
+        return false; // Cliente não encontrado
+    }
+
+    // Getter para a lista de clientes
+    public List<Cliente> getClientes() {
+        return clientes;
     }
 }
 
