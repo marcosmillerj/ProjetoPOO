@@ -10,34 +10,40 @@ package models;
  */
 
 import java.util.Date;
+import java.util.UUID;  // Importando UUID para gerar um identificador único
 
 public class Reserva {
+    private String codigo;  // Código identificador único
     private Cliente cliente;
-    private Produto produto;
     private Date dataReserva;
 
     // Construtor
-    public Reserva(Cliente cliente, Produto produto, Date dataReserva) {
+    public Reserva(Cliente cliente, Date dataReserva) {
+        this.codigo = gerarCodigoUnico();  // Gerando um código único para a reserva
         this.cliente = cliente;
-        this.produto = produto;
         this.dataReserva = dataReserva;
     }
 
+    // Método para gerar um código único usando UUID
+    private String gerarCodigoUnico() {
+        return UUID.randomUUID().toString();  // Gera um código único baseado em UUID
+    }
+
     // Getters e Setters
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
     }
 
     public Date getDataReserva() {
@@ -52,8 +58,8 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" +
-                "cliente=" + cliente.getNome() +
-                ", produto=" + produto.getNome() +
+                "codigo='" + codigo + '\'' +
+                ", cliente=" + cliente.getNome() +
                 ", dataReserva=" + dataReserva +
                 '}';
     }
