@@ -12,21 +12,16 @@ package models;
 import java.time.LocalDateTime;
 
 public class Aula {
-    private String tipo; // Exemplo: Yoga, Pilates, Spinning
-    private LocalDateTime horario; // Data e hora da aula
-    private Instrutor instrutor; // Instrutor responsável pela aula
-    private int capacidadeMaxima; // Máximo de alunos permitidos
-    private int inscritos; // Quantidade atual de inscritos
+    private String tipo;
+    private LocalDateTime horario;
+    private Funcionario funcionario; // Alterado de Instrutor para Funcionario
 
-    // Construtor
-    public Aula(String tipo, LocalDateTime horario, Instrutor instrutor) {
+    public Aula(String tipo, LocalDateTime horario, Funcionario funcionario) {
         this.tipo = tipo;
         this.horario = horario;
-        this.instrutor = instrutor;
-        this.inscritos = 0; // Inicialmente não há inscritos
+        this.funcionario = funcionario;
     }
 
-    // Getters e Setters
     public String getTipo() {
         return tipo;
     }
@@ -43,44 +38,12 @@ public class Aula {
         this.horario = horario;
     }
 
-    public Instrutor getInstrutor() {
-        return instrutor;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setInstrutor(Instrutor instrutor) {
-        this.instrutor = instrutor;
-    }
-
-    public int getCapacidadeMaxima() {
-        return capacidadeMaxima;
-    }
-
-
-    public int getInscritos() {
-        return inscritos;
-    }
-
-    public void setInscritos(int inscritos) {
-        this.inscritos = inscritos;
-    }
-
-    // Métodos
-    public boolean adicionarAluno() {
-        if (inscritos < capacidadeMaxima) {
-            inscritos++;
-            return true;
-        } else {
-            return false; // Turma cheia
-        }
-    }
-
-    public boolean removerAluno() {
-        if (inscritos > 0) {
-            inscritos--;
-            return true;
-        } else {
-            return false; // Não há alunos para remover
-        }
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     @Override
@@ -88,9 +51,9 @@ public class Aula {
         return "Aula{" +
                 "tipo='" + tipo + '\'' +
                 ", horario=" + horario +
-                ", instrutor=" + instrutor.getNome() +
-                ", inscritos=" + inscritos +
+                ", funcionario=" + funcionario +
                 '}';
     }
 }
+
 
